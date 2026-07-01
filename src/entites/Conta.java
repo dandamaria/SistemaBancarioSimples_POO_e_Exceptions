@@ -4,12 +4,16 @@ import exceptions.ContaBloqueadaException;
 import exceptions.SaldoInsuficienteException;
 import exceptions.ValorInvalidoException;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 public abstract class Conta {
     private int numeroConta;
     private int agencia;
     private double saldo = 0;
     private boolean ativa;
     private Cliente titular;
+    LocalDateTime dateOperacao;
 
     public Conta(int numeroConta, int agencia, double saldo, Cliente titular) {
         this.numeroConta = numeroConta;
@@ -28,6 +32,7 @@ public abstract class Conta {
         this.saldo += valor;
         System.out.println("\n[INFO]" +
                 "\nDepósito de R$"+valor+" realizado com sucesso.");
+        dateOperacao = LocalDateTime.now();
     }
 
     public void sacar(double valor){
@@ -42,17 +47,18 @@ public abstract class Conta {
         setSaldo(getSaldo()-valor);
         System.out.println("\n[INFO]" +
                 "\nSaque de R$"+valor+" realizado com sucesso.");
-
+        dateOperacao = LocalDateTime.now();
     };
 
     public void transferir(double valor, Conta destinatario){
        if(!isAtiva()){
             throw new ContaBloqueadaException("A conta do titular está bloqueada");
-        }else if(!destinatario.isAtiva()){
+       }else if(!destinatario.isAtiva()){
             throw new ContaBloqueadaException("A conta do destinatário está bloqueada");
-        }
-        sacar(valor);
-        depositar(valor);
+       }
+       sacar(valor);
+       depositar(valor);
+       dateOperacao = LocalDateTime.now();
     }
 
     public void consultarSaldo(){

@@ -23,9 +23,10 @@ public class Main {
 
         conta1_cliente1.mostrarDados();
         conta2_cliente.mostrarDados();
+        conta1_cliente1.depositar(10);
 
         try{
-            conta1_cliente.depositar(-900);
+            conta1_cliente.depositar(900);
             conta1_cliente.transferir(500, conta2_cliente);
 
             conta2_cliente.transferir(300, conta1_cliente1);
