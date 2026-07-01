@@ -24,5 +24,22 @@ public class Main {
         conta1_cliente1.mostrarDados();
         conta2_cliente.mostrarDados();
 
+        try{
+            conta1_cliente.depositar(-900);
+            conta1_cliente.transferir(500, conta2_cliente);
+
+            conta2_cliente.transferir(300, conta1_cliente1);
+
+            conta1_cliente.consultarSaldo();
+            conta2_cliente.consultarSaldo();
+            conta1_cliente1.consultarSaldo();
+            conta2_cliente1.consultarSaldo();
+
+        } catch (RuntimeException e) {
+            System.out.println("-------------------------------------");
+            System.out.println("[ERROR]");
+            System.out.println(e.getMessage());
+        }
+
     }
 }

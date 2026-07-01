@@ -26,6 +26,8 @@ public abstract class Conta {
             throw new ValorInvalidoException("Valor inválido");
         }
         this.saldo += valor;
+        System.out.println("\n[INFO]" +
+                "\nDepósito de R$"+valor+" realizado com sucesso.");
     }
 
     public void sacar(double valor){
@@ -36,9 +38,11 @@ public abstract class Conta {
             throw new ContaBloqueadaException("A conta está bloqueada");
         }else if(valor<=0){
             throw new ValorInvalidoException("Valor inválido");
-        }else {
-            setSaldo(getSaldo()-valor-2);
         }
+        setSaldo(getSaldo()-valor);
+        System.out.println("\n[INFO]" +
+                "\nSaque de R$"+valor+" realizado com sucesso.");
+
     };
 
     public void transferir(double valor, Conta destinatario){
@@ -52,6 +56,7 @@ public abstract class Conta {
     }
 
     public void consultarSaldo(){
+        System.out.println("Conta: "+titular);
         System.out.println("Saldo: R$"+getSaldo());
     }
 
