@@ -57,7 +57,7 @@ public abstract class Conta {
             throw new ContaBloqueadaException("A conta do destinatário está bloqueada");
        }
        sacar(valor);
-       depositar(valor);
+       destinatario.depositar(valor);
        dateOperacao = LocalDateTime.now();
     }
 
